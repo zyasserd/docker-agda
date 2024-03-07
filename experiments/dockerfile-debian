@@ -1,0 +1,12 @@
+# Building from this dockerfile is faster
+# but has problems as the prebuilt debian packages aren't usually uptodate
+# still missing cubical
+
+FROM debian:bookworm-slim
+
+# Installing  using the prebuilt debian packages
+# find versions heagdare https://tracker.debian.org/pkg/agda
+ARG agda_version=2.6.2.2-1.1
+ARG agda_stdlib_version=1.7.1-1
+RUN apt update && \
+    apt install -y --no-install-recommends agda=${agda_version} agda-stdlib=${agda_stdlib_version}
