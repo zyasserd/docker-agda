@@ -18,13 +18,15 @@ RUN cabal clean
 
 # Install libraries [1: cubical]
 RUN git clone --depth 1 -b "v${AGDA_CUBICAL_VER}" https://github.com/agda/cubical.git       /root/.agda/cubical
-RUN cd /root/.agda/cubical && make
+#!! if 'compiled' => 1
+# RUN cd /root/.agda/cubical && make
 
 # Install libraries [2: stdlib]
 RUN git clone --depth 1 -b "v${AGDA_STDLIB_VER}"  https://github.com/agda/agda-stdlib.git   /root/.agda/stdlib
+#!! if 'compiled' => 2 3
 # prerequisite for stdlib installation
-RUN cd /tmp && git clone https://github.com/agda/fix-whitespace --depth 1 && cd fix-whitespace/ && cabal install
-RUN cd /root/.agda/stdlib && make
+# RUN cd /tmp && git clone https://github.com/agda/fix-whitespace --depth 1 && cd fix-whitespace/ && cabal install
+# RUN cd /root/.agda/stdlib && make
 
 # Install libraries [...]
 # LATER : do you want to import other libraries as well: 1lab, unimath, agda-categories, PLFA,...
