@@ -9,16 +9,20 @@
 				"banacorn.agda-mode"
 			]
 		}
-	}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cat /etc/os-release",
+	// [A] create a link of the cubical library in the workspace
+	"postCreateCommand": "ln -s /root/.agda/cubical/Cubical /workspaces/Cubical",
+	// [B] Sets the vscode workspace directory to /workspaces
+	"workspaceFolder": "/workspaces" 
 
 	// Configure tool-specific properties.
 	// "customizations": {},
