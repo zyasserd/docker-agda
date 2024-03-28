@@ -47,8 +47,7 @@ RUN cd /root/.local/state/cabal/store/*/ && \
 FROM debian:buster-slim
 # FROM haskell:${GHC_VER}-slim
 
-# Add in 
-ENV so that agda works 
+# Add in ENV so that agda works 
 ENV PATH="$PATH:/root/.local/bin"
 
 # Copy Agda Binaries and Executables
