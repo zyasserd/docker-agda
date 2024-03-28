@@ -72,7 +72,7 @@ for arg in "${args[@]}"; do
     if [ "$multi_platform_mode" = true ]; then
         ./commentor.py dockerfile $arg \
             | docker buildx build \
-                --platform linux/arm64/v8,linux/amd64
+                --platform linux/arm64/v8,linux/amd64 \
                 --build-arg GHC_VER=$GHC_VER \
                 --build-arg AGDA_VER=$AGDA_VER \
                 --build-arg AGDA_STDLIB_VER=$AGDA_STDLIB_VER \
