@@ -9,11 +9,21 @@ push_mode=false
 
 # Function to display script usage
 usage() {
- echo "Usage: $0 [OPTIONS]"
- echo "Options:"
- echo " -h, --help              Display this help message"
- echo " -m, --multi-platform    Compile both linux/arm64/v8,linux/amd64 using buildx."
- echo " -p, --push              Push to Docker Hub."
+    RED=$'\e[0;31m'
+    NC=$'\e[0m'
+
+    echo "Usage: $0 [OPTIONS]"
+    echo "Options:"
+    echo "    -h, --help"
+    echo "            Display this help message"
+    echo "    -m, --multi-platform"
+    echo "            Compile both linux/arm64/v8,linux/amd64 using buildx"
+    echo "            ${RED}REQ${NC}: before running, make sure to create makes a new builder instance"
+    echo "                 using  : docker buildx create"
+    echo "                 example: docker buildx create --use --platform=linux/arm64/v8,linux/amd64 --name <name>"
+    echo "    -p, --push"
+    echo "            Push to Docker Hub"
+    echo "            ${RED}REQ${NC}: before running, make sure to 'docker login'"
 }
 
 has_argument() {
@@ -21,31 +31,31 @@ has_argument() {
 }
 
 extract_argument() {
-  echo "${2:-${1#*=}}"
+    echo "${2:-${1#*=}}"
 }
 
 # Function to handle options and arguments
 handle_options() {
-  while [ $# -gt 0 ]; do
-    case $1 in
-      -h | --help)
-        usage
-        exit 0
-        ;;
-      -m | --multi-platform)
-        multi_platform_mode=true
-        ;;
-      -p | --push)
-        push_mode=true
-        ;;
-      *)
-        echo "Invalid option: $1" >&2
-        usage
-        exit 1
-        ;;
-    esac
-    shift
-  done
+    while [ $# -gt 0 ]; do
+        case $1 in
+            -h | --help)
+                usage
+                exit 0
+                ;;
+            -m | --multi-platform)
+                multi_platform_mode=true
+                ;;
+            -p | --push)
+                push_mode=true
+                ;;
+            *)
+                echo "Invalid option: $1" >&2
+                usage
+                exit 1
+                ;;
+        esac
+        shift
+    done
 }
 
 # Main script execution
